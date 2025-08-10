@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/widgets/app_bar.dart';
-import 'package:hello_world/widgets/body.dart';
+import 'package:hello_world/root/widgets/app_bar.dart';
+import 'package:hello_world/root/widgets/body.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
