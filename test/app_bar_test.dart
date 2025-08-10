@@ -12,6 +12,7 @@ void main() {
       ),
     );
 
-    expect(find.text('Hello World'), findsOneWidget);
+    expect(find.text('Hello'), findsOneWidget);
+    expect(find.text(' World'), findsOneWidget);
   });
 }
