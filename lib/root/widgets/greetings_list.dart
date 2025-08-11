@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/root/widgets/greetings.dart';
+import 'package:hello_world/root/data/greetings.dart';
 
 class GreetingsList extends StatelessWidget {
   const GreetingsList({super.key});
