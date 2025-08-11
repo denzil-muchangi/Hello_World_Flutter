@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/root/widgets/greetings.dart';
+import 'package:hello_world/root/widgets/greetings_list.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -14,16 +14,7 @@ class Body extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
       ),
-      child: ListView.builder(
-        itemCount: greetings.length,
-        itemBuilder: (context, index) {
-          String key = greetings.keys.elementAt(index);
-          return ListTile(
-            title: Text(key, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            subtitle: Text(greetings[key]!, style: const TextStyle(color: Colors.white)),
-          );
-        },
-      ),
+      child: const GreetingsList(),
     );
   }
 }
