@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hello_world/root/screens/profile_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -6,30 +8,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.grey,
-      elevation: 8.0,
-      centerTitle: true,
-      title: RichText(
-        text: TextSpan(
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge?.copyWith(fontSize: 28),
-          children: const <TextSpan>[
-            TextSpan(
-              text: 'Hello',
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Roboto',
-              ),
-            ),
-            TextSpan(
-              text: ' World',
-              style: TextStyle(color: Colors.green),
-            ),
-          ],
-        ),
+      title: SvgPicture.asset(
+        'assets/icons/hello_world.svg',
+        height: 30,
       ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.person),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfilePage()),
+            );
+          },
+        ),
+      ],
     );
   }
 
