@@ -82,7 +82,7 @@ packages:
     source: hosted
     version: "3.1.2"
   country_icons:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: country_icons
       sha256: "836435012b42c7dcc6d585d1420ce2310d70396569ef70cf5d74c740919f7320"
@@ -148,7 +148,7 @@ packages:
     source: hosted
     version: "5.0.0"
   flutter_svg:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_svg
       sha256: cd57f7969b4679317c17af6fd16ee233c1e60a82ed209d8a475c54fd6fd6f845

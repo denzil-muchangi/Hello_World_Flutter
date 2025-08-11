@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  country_icons: ^2.0.2
+  flutter_svg: ^2.0.10+1
   flutter:
     sdk: flutter
 
@@ -42,9 +44,7 @@ dev_dependencies:
     sdk: flutter
   flutter_driver:
     sdk: flutter
-  country_icons: ^2.0.2
-  flutter_svg: ^2.0.10+1
-
+  
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
