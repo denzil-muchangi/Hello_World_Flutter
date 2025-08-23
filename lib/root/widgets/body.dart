@@ -6,10 +6,15 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.purple, Colors.blue],
+          colors: [
+            theme.primaryColor.withValues(alpha: 0.7),
+            theme.colorScheme.secondary.withValues(alpha: 0.7),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),

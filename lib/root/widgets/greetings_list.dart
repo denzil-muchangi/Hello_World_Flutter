@@ -26,8 +26,19 @@ class GreetingsList extends StatelessWidget {
                   )
                 : const Icon(Icons.flag),
           ),
-          title: Text(language, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          subtitle: Text(greeting!, style: const TextStyle(color: Colors.white)),
+          title: Text(
+            language, 
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            greeting!, 
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+          ),
         );
       },
     );
