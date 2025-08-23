@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hello_world/root/screens/profile_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -8,9 +7,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: SvgPicture.asset(
-        'assets/icons/hello_world.svg',
-        height: 30,
+      title: Text(
+        'Hello World',
+        style: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.2,
+          color: Theme.of(context).brightness == Brightness.dark 
+              ? Colors.white 
+              : Theme.of(context).primaryColor,
+          shadows: [
+            Shadow(
+              blurRadius: 3.0,
+              color: Theme.of(context).brightness == Brightness.dark 
+                  ? Colors.black.withValues(alpha: 0.5)
+                  : Colors.grey.withValues(alpha: 0.5),
+              offset: const Offset(1.0, 1.0),
+            ),
+          ],
+        ),
       ),
       actions: [
         IconButton(
