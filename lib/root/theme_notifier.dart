@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/root/theme.dart';
 
 class ThemeNotifier extends ChangeNotifier {
   ThemeData _currentTheme;
