@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../data/countries_data.dart';
-import '../theme_notifier.dart';
 import '../widgets/greetings_display.dart';
 
 class CountriesExplorerScreen extends StatefulWidget {
@@ -163,12 +161,12 @@ class _CountriesExplorerScreenState extends State<CountriesExplorerScreen> {
                   _selectedContinent = continent == 'All' ? null : continent;
                 });
               },
-              backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
               selectedColor: Theme.of(context).colorScheme.primary,
               labelStyle: TextStyle(
                 color: isSelected 
                     ? Theme.of(context).colorScheme.onPrimary
-                    : Theme.of(context).colorScheme.onSurfaceVariant,
+                    : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
               ),
             ),
           );
@@ -197,7 +195,7 @@ class _CountriesExplorerScreenState extends State<CountriesExplorerScreen> {
               end: Alignment.bottomRight,
               colors: [
                 theme.colorScheme.surface,
-                theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
+                theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
               ],
             ),
           ),
@@ -271,15 +269,15 @@ class _CountriesExplorerScreenState extends State<CountriesExplorerScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.surfaceVariant,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        '+${country['languages'].length - 2}',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
+                        color: theme.colorScheme.surfaceContainerHighest,
+                       borderRadius: BorderRadius.circular(8),
+                     ),
+                     child: Text(
+                       '+${country['languages'].length - 2}',
+                       style: TextStyle(
+                         fontSize: 10,
+                         color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                       ),
                       ),
                     ),
                 ],
