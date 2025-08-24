@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/countries_data.dart';
 import '../theme_notifier.dart';
+import '../widgets/greetings_display.dart';
 
 class CountriesExplorerScreen extends StatefulWidget {
   const CountriesExplorerScreen({super.key});
@@ -295,81 +296,89 @@ class _CountriesExplorerScreenState extends State<CountriesExplorerScreen> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
+      isScrollControlled: true,
       builder: (context) {
         final theme = Theme.of(context);
         
         return Container(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    country['flag'],
-                    style: const TextStyle(fontSize: 48),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          country['name'],
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Capital: ${country['capital']}',
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                          ),
-                        ),
-                      ],
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      country['flag'],
+                      style: const TextStyle(fontSize: 48),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Text(
-                'Languages',
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (var language in country['languages'])
-                    Chip(
-                      label: Text(language),
-                      backgroundColor: theme.colorScheme.primary.withValues(alpha: 0.1),
-                      labelStyle: TextStyle(
-                        color: theme.colorScheme.primary,
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            country['name'],
+                            style: theme.textTheme.headlineSmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            'Capital: ${country['capital']}',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                ],
-              ),
-              if (country['continent'] != null) ...[
-                const SizedBox(height: 16),
+                  ],
+                ),
+                const SizedBox(height: 24),
                 Text(
-                  'Continent: ${country['continent']}',
-                  style: theme.textTheme.bodyLarge,
+                  'Languages',
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (var language in country['languages'])
+                      Chip(
+                        label: Text(language),
+                        backgroundColor: theme.colorScheme.primary.withValues(alpha: 0.1),
+                        labelStyle: TextStyle(
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                  ],
+                ),
+                if (country['continent'] != null) ...[
+                  const SizedBox(height: 16),
+                  Text(
+                    'Continent: ${country['continent']}',
+                    style: theme.textTheme.bodyLarge,
+                  ),
+                ],
+                const SizedBox(height: 24),
+                GreetingsDisplay(languages: List<String>.from(country['languages'])),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Close'),
+                  ),
                 ),
               ],
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Close'),
-                ),
-              ),
-            ],
+            ),
           ),
         );
       },
