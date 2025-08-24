@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../data/greetings_data.dart';
 
@@ -175,7 +174,7 @@ class _GreetingsDisplayState extends State<GreetingsDisplay> {
                   decoration: BoxDecoration(
                     color: isCurrentlyPlaying 
                         ? theme.colorScheme.primary.withValues(alpha: 0.2)
-                        : theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
+                        : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isCurrentlyPlaying 
