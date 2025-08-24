@@ -36,7 +36,8 @@ class _CountriesExplorerScreenState extends State<CountriesExplorerScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    // Remove unused themeNotifier variable
+    // final themeNotifier = Provider.of<ThemeNotifier>(context);
 
     return Scaffold(
       appBar: AppBar(
