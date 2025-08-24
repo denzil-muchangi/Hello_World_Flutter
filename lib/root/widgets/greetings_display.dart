@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../data/greetings_data.dart';
 
@@ -23,28 +24,46 @@ class _GreetingsDisplayState extends State<GreetingsDisplay> {
   }
 
   void _initTts() async {
-    await flutterTts.setLanguage('en-US');
-    await flutterTts.setPitch(1.0);
-    await flutterTts.setSpeechRate(0.5);
+    try {
+      // Wait for TTS engine to initialize
+      await Future.delayed(const Duration(milliseconds: 100));
+      
+      // Check if TTS is available
+      var engines = await flutterTts.getEngines;
+      if (engines != null && engines.isNotEmpty) {
+        await flutterTts.setLanguage('en-US');
+        await flutterTts.setPitch(1.0);
+        await flutterTts.setSpeechRate(0.5);
+      }
+    } catch (e) {
+      debugPrint('TTS initialization error: $e');
+    }
     
     flutterTts.setStartHandler(() {
-      setState(() {
-        isPlaying = true;
-      });
+      if (mounted) {
+        setState(() {
+          isPlaying = true;
+        });
+      }
     });
 
     flutterTts.setCompletionHandler(() {
-      setState(() {
-        isPlaying = false;
-        currentlyPlaying = null;
-      });
+      if (mounted) {
+        setState(() {
+          isPlaying = false;
+          currentlyPlaying = null;
+        });
+      }
     });
 
     flutterTts.setErrorHandler((msg) {
-      setState(() {
-        isPlaying = false;
-        currentlyPlaying = null;
-      });
+      if (mounted) {
+        setState(() {
+          isPlaying = false;
+          currentlyPlaying = null;
+        });
+      }
+      debugPrint('TTS error: $msg');
     });
   }
 
@@ -54,17 +73,29 @@ class _GreetingsDisplayState extends State<GreetingsDisplay> {
       return;
     }
 
-    await flutterTts.stop();
-    
-    String ttsLanguage = _getTtsLanguageCode(language);
-    await flutterTts.setLanguage(ttsLanguage);
-    await flutterTts.setVolume(1.0);
-    
-    setState(() {
-      currentlyPlaying = language;
-    });
-    
-    await flutterTts.speak(greeting);
+    try {
+      await flutterTts.stop();
+      
+      String ttsLanguage = _getTtsLanguageCode(language);
+      await flutterTts.setLanguage(ttsLanguage);
+      await flutterTts.setVolume(1.0);
+      
+      if (mounted) {
+        setState(() {
+          currentlyPlaying = language;
+        });
+      }
+      
+      await flutterTts.speak(greeting);
+    } catch (e) {
+      debugPrint('Error speaking greeting: $e');
+      if (mounted) {
+        setState(() {
+          isPlaying = false;
+          currentlyPlaying = null;
+        });
+      }
+    }
   }
 
   String _getTtsLanguageCode(String language) {
