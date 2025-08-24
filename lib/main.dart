@@ -9,7 +9,6 @@ void main() {
     ChangeNotifierProvider(
       create: (_) => ThemeNotifier(lightTheme),
       child: const MyApp(),
-
     ),
   );
 }
