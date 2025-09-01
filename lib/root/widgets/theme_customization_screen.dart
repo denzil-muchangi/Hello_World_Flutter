@@ -28,9 +28,11 @@ class _ThemeCustomizationScreenState extends State<ThemeCustomizationScreen> {
 
   void _saveCustomTheme() async {
     if (_themeNameController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a theme name')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please enter a theme name')),
+        );
+      }
       return;
     }
 
@@ -52,19 +54,21 @@ class _ThemeCustomizationScreenState extends State<ThemeCustomizationScreen> {
     await ThemeStorage.saveCustomThemes(existingThemes);
 
     // Apply the new theme
-    final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
-    themeNotifier.changeTheme(customTheme.toThemeData());
-
-    // Save current theme name
-    await ThemeStorage.saveCurrentTheme(customTheme.name);
-
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Theme "${customTheme.name}" saved and applied!'),
-        ),
-      );
-      Navigator.of(context).pop();
+      final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
+      themeNotifier.changeTheme(customTheme.toThemeData());
+
+      // Save current theme name
+      await ThemeStorage.saveCurrentTheme(customTheme.name);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Theme "${customTheme.name}" saved and applied!'),
+          ),
+        );
+        Navigator.of(context).pop();
+      }
     }
   }
 
@@ -97,16 +101,16 @@ class _ThemeCustomizationScreenState extends State<ThemeCustomizationScreen> {
             const SizedBox(width: 16),
             Expanded(
               child: Slider(
-                value: currentColor.red.toDouble(),
+                value: (currentColor.r * 255.0).roundToDouble(),
                 min: 0,
                 max: 255,
                 onChanged: (value) {
                   onColorChanged(
                     Color.fromARGB(
-                      currentColor.alpha,
+                      (currentColor.a * 255.0).round(),
                       value.toInt(),
-                      currentColor.green,
-                      currentColor.blue,
+                      (currentColor.g * 255.0).round(),
+                      (currentColor.b * 255.0).round(),
                     ),
                   );
                 },

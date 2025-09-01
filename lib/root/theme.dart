@@ -87,16 +87,12 @@ class CustomThemeData {
         primary: primaryColor,
         secondary: secondaryColor,
         surface: surfaceColor,
-        background: backgroundColor,
         error: errorColor,
         onPrimary: brightness == Brightness.light ? Colors.white : Colors.black,
         onSecondary: brightness == Brightness.light
             ? Colors.white
             : Colors.black,
         onSurface: brightness == Brightness.light
-            ? Colors.black87
-            : Colors.white,
-        onBackground: brightness == Brightness.light
             ? Colors.black87
             : Colors.white,
         onError: Colors.white,
@@ -133,11 +129,11 @@ class CustomThemeData {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'primaryColor': primaryColor.value,
-      'secondaryColor': secondaryColor.value,
-      'surfaceColor': surfaceColor.value,
-      'backgroundColor': backgroundColor.value,
-      'errorColor': errorColor.value,
+      'primaryColor': primaryColor.toARGB32(),
+      'secondaryColor': secondaryColor.toARGB32(),
+      'surfaceColor': surfaceColor.toARGB32(),
+      'backgroundColor': backgroundColor.toARGB32(),
+      'errorColor': errorColor.toARGB32(),
       'brightness': brightness == Brightness.light ? 'light' : 'dark',
     };
   }
