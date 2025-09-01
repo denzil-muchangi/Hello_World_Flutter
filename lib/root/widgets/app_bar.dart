@@ -16,15 +16,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           fontSize: 20.sp,
           fontWeight: FontWeight.bold,
           letterSpacing: 1.2,
-          color: Theme.of(context).brightness == Brightness.dark 
-              ? Colors.white 
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.white
               : Theme.of(context).primaryColor,
           shadows: [
             Shadow(
               blurRadius: 3.0,
-              color: Theme.of(context).brightness == Brightness.dark 
-                  ? Colors.black.withOpacity(0.5)
-                  : Colors.grey.withOpacity(0.5),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black.withValues(alpha: 0.5)
+                  : Colors.grey.withValues(alpha: 0.5),
               offset: const Offset(1.0, 1.0),
             ),
           ],
@@ -37,16 +37,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CountriesExplorerScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const CountriesExplorerScreen(),
+                ),
               );
             },
           ),
-        if (ResponsiveBreakpoints.of(context).isTablet || ResponsiveBreakpoints.of(context).isDesktop)
+        if (ResponsiveBreakpoints.of(context).isTablet ||
+            ResponsiveBreakpoints.of(context).isDesktop)
           ElevatedButton.icon(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CountriesExplorerScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const CountriesExplorerScreen(),
+                ),
               );
             },
             icon: const Icon(Icons.public),

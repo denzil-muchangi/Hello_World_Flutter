@@ -7,13 +7,13 @@ class BodyTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            theme.primaryColor.withOpacity(0.7),
-            theme.colorScheme.secondary.withOpacity(0.7),
+            theme.primaryColor.withValues(alpha: 0.7),
+            theme.colorScheme.secondary.withValues(alpha: 0.7),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
